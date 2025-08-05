@@ -83,7 +83,7 @@ r.record()
  ```
 
 ## License
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 Bilal Darwish - <a href='mailto:darwish.b.bilal@gmail.com'>darwish.b.bilal@gmail.com</a> <br>
