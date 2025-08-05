@@ -2,29 +2,46 @@
 An easy to use library for recording and saving speech audio
 
 <details open>
-<summary>Contents</summary>
-1. [About the Project](#about-the-project) <br>
-2. [Features](#features) <br>
-3. [Installation](#installation) <br>
-4. [Usage](#usage) <br>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
 </details>
 
 ## About the Project
-SpeechCapture is a library made to simplify the complex process of recording and saving your voice automatically from Python code.
+SpeechCapture is a Python library made to simplify the complex process of recording and saving your voice automatically from Python code.
 
-## Features
- - Automatic stop on silence
- - Customizable silence threshold
-	- Dynamically adjust threshold based on surrounding noise
- - Pausing and resuming recording
- - Saving recording at any time as .WAV
- - Recording in background threads
- - Simultaneous recordings
- - Stopping at any time
+### Features
+<ul>
+	<li>Automatic stop on silence</li>
+	<li>Customizable silence threshold</li>
+	<li>Dynamically adjust threshold based on surrounding noise</li>
+	<li>Pausing and resuming recording</li>
+	<li>Saving audio as .WAV at any time</li>
+	<li>Recording in background threads</li>
+	<li>Simultaneous recordings</li>
+	<li>Stopping at any time</li>
+</ul>
 
-## Installation
+## Getting Started
+### Prerequisites
+To use SpeechCapture, you will need the following installed:
+- Python 3.7 or higher
+
+### Installation
 To install, simply run in your terminal:
-```
+```bash
 $ pip install speechcapture
 ```
 Once you have installed the package, do not forget to import:
@@ -32,6 +49,23 @@ Once you have installed the package, do not forget to import:
 import speechcapture
 ```
 You can now start using SpeechCapture (example usage below)
+
+<hr>
+
+#### **PyAudio**
+If installation of PyAudio, a required dependancy, fails, try running the following commands: <br>
+
+**MacOS**
+```bash
+$ brew install portaudio
+$ pip install pyaudio
+```
+
+**Ubuntu/Linux**
+```bash
+$ sudo apt install portaudio19-dev
+$ pip install pyaudio
+```
 
  ## Usage
  ```py
@@ -49,4 +83,14 @@ r.record()
  ```
 
 ## License
-This library is distributed under the MIT License
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+## Contact
+Bilal Darwish - <a href='mailto:darwish.b.bilal@gmail.com'>darwish.b.bilal@gmail.com</a> <br>
+
+Source Code and Issues: https://github.com/bdarwish/speechcapture/
+
+## Acknowledgments
+Dependencies:
+- [PyAudio](https://pypi.org/project/PyAudio/)
+- [NumPy](https://pypi.org/project/numpy/)
