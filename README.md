@@ -3,10 +3,10 @@ An easy to use library for recording and saving speech audio
 
 <details open>
 <summary>Contents</summary>
-1. [About the Project](#about-the-project)
-2. [Features](#features)
-3. [Installation](#installation)
-4. [Usage](#usage)
+1. [About the Project](#about-the-project) <br>
+2. [Features](#features) <br>
+3. [Installation](#installation) <br>
+4. [Usage](#usage) <br>
 </details>
 
 ## About the Project
