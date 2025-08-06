@@ -1,16 +1,16 @@
 [project]
 name = "speechcapture"
-version = "0.2.1"
+version = "0.2.2"
 description = "An easy to use library for recording and saving speech audio"
 authors = [
     {name = "Bilal Darwish", email = "darwish.b.bilal@gmail.com"}
 ]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 dependencies = [
-    "pyaudio (>=0.2.14,<0.3.0)",
-    "numpy (>=2.3.2,<3.0.0)"
+    "pyaudio (>=0.2.11)",
+    "numpy (>=1.20)"
 ]
 keywords = ["speech", "audio", "record"]
 
