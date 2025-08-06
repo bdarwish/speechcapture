@@ -75,9 +75,9 @@ file_path = 'output.wav'
 
 r = sc.Recorder(file_path)
 
-r.adjust_for_ambient_noise(adjustment_time=3)
+r.adjust_for_ambient_noise()
 
-r.max_seconds_of_silence = 5
+r.max_seconds_of_silence = 3
 
 r.record()
  ```
