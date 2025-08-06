@@ -37,7 +37,7 @@ SpeechCapture is a Python library made to simplify the complex process of record
 ## Getting Started
 ### Prerequisites
 To use SpeechCapture, you will need the following installed:
-- Python 3.7 or higher
+- Python 3.11 or higher
 
 ### Installation
 To install, simply run in your terminal:
