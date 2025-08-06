@@ -287,8 +287,3 @@ def list_input_devices():
             if info['maxInputChannels'] > 0:
                 print(f"{i}: {info['name']}")
         p.terminate()
-
-list_input_devices()
-r = Recorder('output.wav', debug=True)
-r.max_seconds_of_silence = None
-r.adjust_to_background_noise(3)
