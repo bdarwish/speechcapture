@@ -163,6 +163,7 @@ class Recorder:
 
                     if self._silent_buffers >= (self.max_seconds_of_silence) / (self.FRAMES_PER_BUFFER / self.RATE):
                         self.stop()
+                        break
     
     def record_async(self, daemon=False):
         '''
@@ -189,6 +190,7 @@ class Recorder:
                 self._duration = time.time() - self._start_time
             if self._stream.is_active():
                 self._stream.stop_stream()
+            # Error above comment
             with self._lock:
                 self.save()
             self.discard()
@@ -208,7 +210,6 @@ class Recorder:
         Resume recording.
         '''
         if self._is_paused and self._stream.is_stopped():
-            print(1)
             self._is_paused = False
             self._stream.start_stream()
 
