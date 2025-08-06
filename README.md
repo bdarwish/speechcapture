@@ -1,4 +1,9 @@
-# SpeechCapture
+<div align='center'>
+	<img src=logo.png width=150>
+</div>
+
+<h1 align='center'>SpeechCapture</h1>
+
 An easy to use library for recording and saving speech audio
 
 <details open>
@@ -37,7 +42,7 @@ SpeechCapture is a Python library made to simplify the complex process of record
 ## Getting Started
 ### Prerequisites
 To use SpeechCapture, you will need the following installed:
-- Python 3.11 or higher
+- Python 3.8 or higher
 
 ### Installation
 To install, simply run in your terminal:
