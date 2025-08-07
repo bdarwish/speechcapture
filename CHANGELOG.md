@@ -2,6 +2,15 @@
 # Change Log
 The changes of each release is documented here.
 
+## [v0.3.0] - 2025-08-7
+This release adds the `max_duration` attribute to the `Recorder` class
+
+### Added
+[Commit 1d21566](https://github.com/bdarwish/speechcapture/commit/1d2156659f97feae99891a3e6258ab7ba3444e8f) Added max_duration to the Recorder class
+
+### Changed
+[Commit e6642f8](https://github.com/bdarwish/speechcapture/commit/e6642f80e95f7048c284685f377492b212540f54) Updated CHANGELOG.md
+
 ## [v0.2.4] - 2025-08-6
 This release fixes a critical bug and removes leftover debug lines of code. 
 
