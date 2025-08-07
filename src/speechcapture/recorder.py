@@ -19,6 +19,7 @@ class Recorder:
         max_seconds_of_silence (int): The maximum seconds of silence before ending the recording (set to None to keep recording until .stop() is called)
         max_silence_multiplier (int): The maximum allowed multiplier of the previous amplitude for an outlier to qualify as silence
         standard_deviation_multiplier (int): The multiplier applied to the standard deviation of amplitude values, which is added to the mean when adjusting silence threshold for ambient noise.
+        max_duration (boolean): The maximum length of a recording (set to None to remove limit)
     '''
     def __init__(self,  audio_path: str, device_index: int = pyaudio.PyAudio().get_default_input_device_info()['index'], format: int = pyaudio.paInt16, channels: int = 1, rate: int = 16000, frames_per_buffer: int = 1600, debug=False):
         '''
@@ -50,6 +51,7 @@ class Recorder:
         self.max_seconds_of_silence = 1
         self.max_silence_multiplier = 2
         self.standard_deviation_multiplier = 1.5
+        self.max_duration = None
 
         self._is_recording = False
         self._is_paused = False
@@ -117,6 +119,7 @@ class Recorder:
     def record(self):
         '''
         Start recording audio. If paused, recording again will restart audio.
+        Will stop automatically only if max_seconds_of_silence or max_duration is set, otherwise .stop must be called.
         '''
         with self._lock:
             self._is_recording = True
@@ -129,6 +132,11 @@ class Recorder:
         self._start_time = time.time()
         self._log('Started recording')
         while self._is_recording:
+            if self.max_duration:
+                if time.time() - self._start_time >= self.max_duration:
+                    self.stop()
+                    break
+
             if not self._is_paused:
                 try:
                    data = self._stream.read(self.FRAMES_PER_BUFFER)
@@ -287,4 +295,3 @@ def list_input_devices():
             info = p.get_device_info_by_index(i)
             if info['maxInputChannels'] > 0:
                 print(f"{i}: {info['name']}")
-        p.terminate()
