@@ -2,11 +2,26 @@
 # Change Log
 The changes of each release is documented here.
 
-## [0.2.1] - 2025-08-6
+## [v0.2.4] - 2025-08-6
+This release fixes a critical bug and removes leftover debug lines of code. 
+
+### Changed
+- [Commit 4243790](https://github.com/bdarwish/speechcapture/commit/4243790d9b8d33609eb4f4304e022e08510e29e2) Removed leftover debug lines of code
+
+### Fixed
+- [Commit 4243790](https://github.com/bdarwish/speechcapture/commit/4243790d9b8d33609eb4f4304e022e08510e29e2) Fixed a bug with record() never breaking out of the loop, causing an OSError.
+
+## [v0.2.2] - 2025-08-6
+This release fixes the version of dependencies and Python required.
+
+### Changed
+- [Commit d58100b](https://github.com/bdarwish/speechcapture/commit/d58100b9c3526d75236c4b199ddb2c16ca4c4842) Lowers the required version of: Python to 3.8 or higher, NumPy to 1.20 or higher, and PyAudio to 0.2.11 or higher.
+
+## [v0.2.1] - 2025-08-6
 This release fixes a minor error in the README file of the project
 
 ### Changed
 - [Commit 143e681](https://github.com/bdarwish/speechcapture/commit/143e681514be4e9a54ac8549fb40a72ddd9d3231) Updated README.md to state the correct requirement of Python 3.11 or higher
  
-## [0.2.0] - 2025-08-6
+## [v0.2.0] - 2025-08-6
 Initial release
