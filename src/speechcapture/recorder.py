@@ -10,9 +10,7 @@ import warnings
 class Recorder:
     '''
     The main Recorder class. Used to record and save speech. For simultaneous recordings, create multiple instances.
-
-    Note:
-        You MUST call terminate() when done or use this class within a context manager to safely release system resources
+    You MUST call `terminate()` when done or use this class within a context manager to safely release system resources
 
     Attributes:
         silence_threshold (int): The minimum amplitude of audio to be considered speech
@@ -20,6 +18,7 @@ class Recorder:
         max_silence_multiplier (int): The maximum allowed multiplier of the previous amplitude for an outlier to qualify as silence
         standard_deviation_multiplier (int): The multiplier applied to the standard deviation of amplitude values, which is added to the mean when adjusting silence threshold for ambient noise.
         max_duration (boolean): The maximum length of a recording (set to None to remove limit)
+        stop_on_pause (boolean): Whether a recording should automatically pause instead of automatically stop
     '''
     def __init__(self,  audio_path: str, device_index: int = pyaudio.PyAudio().get_default_input_device_info()['index'], format: int = pyaudio.paInt16, channels: int = 1, rate: int = 16000, frames_per_buffer: int = 1600, debug=False):
         '''
@@ -27,7 +26,7 @@ class Recorder:
 
         Args:
             audio_path (string): The file path to save audio in (must be of format .wav)
-            device_index (int): The index of the input device to use (call speechcapture.list_input_devices() for a list of all devices)
+            device_index (int): The index of the input device to use (call `speechcapture.list_input_devices()` for a list of all devices)
             format (int): The audio sample format
             channels (int): Number of channels used for input (1 for mono, 2 for stereo)
             rate (int): The sample rate of the audio in Hz
@@ -52,6 +51,7 @@ class Recorder:
         self.max_silence_multiplier = 2
         self.standard_deviation_multiplier = 1.5
         self.max_duration = None
+        self.pause_on_end = False
 
         self._is_recording = False
         self._is_paused = False
@@ -119,7 +119,7 @@ class Recorder:
     def record(self):
         '''
         Start recording audio. If paused, recording again will restart audio.
-        Will stop automatically only if max_seconds_of_silence or max_duration is set, otherwise .stop must be called.
+        Will stop/pause automatically only if max_seconds_of_silence or max_duration is set, otherwise `stop()`/`pause()` must be called.
         '''
         with self._lock:
             self._is_recording = True
@@ -134,8 +134,11 @@ class Recorder:
         while self._is_recording:
             if self.max_duration:
                 if time.time() - self._start_time >= self.max_duration:
-                    self.stop()
-                    break
+                    if (self.pause_on_end):
+                        self.pause()
+                    else:
+                        self.stop()
+                        break
 
             if not self._is_paused:
                 try:
@@ -170,13 +173,16 @@ class Recorder:
                     self._log(f'Silent buffers: {self._silent_buffers}')
 
                     if self._silent_buffers >= (self.max_seconds_of_silence) / (self.FRAMES_PER_BUFFER / self.RATE):
-                        self.stop()
-                        break
+                        if (self.pause_on_end):
+                            self.pause()
+                        else:
+                            self.stop()
+                            break
     
     def record_async(self, daemon=False):
         '''
         Calls the record method on a seperate thread. Used to prevent blocking the main thread when recording.
-        Ensure that the thread finishes (such as through .join()) before terminating the session.
+        Ensure that the thread finishes (such as through `join()`) before terminating the session.
 
         Args:
             daemon (boolean): Whether or not the thread should be a daemon thread
@@ -219,6 +225,7 @@ class Recorder:
         '''
         if self._is_paused and self._stream.is_stopped():
             self._is_paused = False
+            self._silent_buffers = 0
             self._stream.start_stream()
 
     def discard(self):
@@ -295,3 +302,5 @@ def list_input_devices():
             info = p.get_device_info_by_index(i)
             if info['maxInputChannels'] > 0:
                 print(f"{i}: {info['name']}")
+    
+r = Recorder()
