@@ -302,5 +302,3 @@ def list_input_devices():
             info = p.get_device_info_by_index(i)
             if info['maxInputChannels'] > 0:
                 print(f"{i}: {info['name']}")
-    
-r = Recorder()
