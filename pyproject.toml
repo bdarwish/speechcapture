@@ -1,6 +1,6 @@
 [project]
 name = "speechcapture"
-version = "0.3.0"
+version = "0.4.0"
 description = "An easy to use library for recording and saving speech audio"
 authors = [
     {name = "Bilal Darwish", email = "darwish.b.bilal@gmail.com"}
