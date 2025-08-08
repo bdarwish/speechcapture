@@ -2,6 +2,12 @@
 # Change Log
 The changes of each release is documented here.
 
+## [v0.4.1] - 2025-08-9
+This release fixes a major bug that prevented any use.
+
+### Fixed
+[Commit 3088b86](https://github.com/bdarwish/speechcapture/commit/3088b86347cbe2f40c4ae10747603c5d8b55a786) Fixed bug caused by leftover debug lines of code
+
 ## [v0.4.0] - 2025-08-8
 This release adds the `pause_on_end` attribute to the `Recorder` class, used to automatically pause the recording instead of stopping.
 
