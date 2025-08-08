@@ -2,8 +2,14 @@
 # Change Log
 The changes of each release is documented here.
 
+## [v0.4.0] - 2025-08-8
+This release adds the `pause_on_end` attribute to the `Recorder` class, used to automatically pause the recording instead of stopping.
+
+### Added
+[Commit 76e820a](https://github.com/bdarwish/speechcapture/commit/76e820ad5b0e9ce4eb12a05edb2ba7fd8af56ab3) Added pause_on_end
+
 ## [v0.3.0] - 2025-08-7
-This release adds the `max_duration` attribute to the `Recorder` class
+This release adds the `max_duration` attribute to the `Recorder` class.
 
 ### Added
 [Commit 1d21566](https://github.com/bdarwish/speechcapture/commit/1d2156659f97feae99891a3e6258ab7ba3444e8f) Added max_duration to the Recorder class
