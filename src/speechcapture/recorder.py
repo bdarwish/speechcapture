@@ -19,6 +19,10 @@ class Recorder:
         standard_deviation_multiplier (int): The multiplier applied to the standard deviation of amplitude values, which is added to the mean when adjusting silence threshold for ambient noise.
         max_duration (boolean): The maximum length of a recording (set to None to remove limit)
         stop_on_pause (boolean): Whether a recording should automatically pause instead of automatically stop
+        on_record (callback): A callback that is run when a recording is started
+        on_end (callback): A callback that is run when a recording is ended
+        on_pause (callback): A callback that is run when a recording is paused
+        on_resume (callback): A callback that is run when a recording is resumed
     '''
     def __init__(self,  audio_path: str, device_index: int = pyaudio.PyAudio().get_default_input_device_info()['index'], format: int = pyaudio.paInt16, channels: int = 1, rate: int = 16000, frames_per_buffer: int = 1600, debug=False):
         '''
@@ -52,6 +56,11 @@ class Recorder:
         self.standard_deviation_multiplier = 1.5
         self.max_duration = None
         self.pause_on_end = False
+        
+        self.on_record = None
+        self.on_stop = None
+        self.on_pause = None
+        self.on_resume = None
 
         self._is_recording = False
         self._is_paused = False
@@ -131,6 +140,8 @@ class Recorder:
             self._stream.start_stream()
         self._start_time = time.time()
         self._log('Started recording')
+        if callable(self.on_record):
+            self.on_record()
         while self._is_recording:
             if self.max_duration:
                 if time.time() - self._start_time >= self.max_duration:
@@ -209,6 +220,8 @@ class Recorder:
                 self.save()
             self.discard()
             self._log('Stopped recording')
+            if callable(self.on_stop):
+                self.on_stop()
     
     def pause(self):
         '''
@@ -218,12 +231,16 @@ class Recorder:
             self._is_paused = True
             self._stream.stop_stream()
             self._duration = time.time() - self._start_time
+            if callable(self.on_pause):
+                self.on_pause()
     
     def resume(self):
         '''
         Resume recording.
         '''
         if self._is_paused and self._stream.is_stopped():
+            if callable(self.on_resume):
+                self.on_resume()
             self._is_paused = False
             self._silent_buffers = 0
             self._stream.start_stream()
