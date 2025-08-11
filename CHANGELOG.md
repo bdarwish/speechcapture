@@ -2,6 +2,12 @@
 # Change Log
 The changes of each release is documented here.
 
+## [v0.5.0] - 2025-08-11
+This release adds callbacks for certain events.
+
+### Added
+[Commit 5b18767](https://github.com/bdarwish/speechcapture/commit/5b1876741102b9143c06407199c324725b623946) Add callbacks for record, stop, pause, and resume events
+
 ## [v0.4.1] - 2025-08-9
 This release fixes a major bug that prevented any use.
 
